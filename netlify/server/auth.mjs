@@ -76,7 +76,7 @@ export async function getSession(request, context, space, kind, family = null) {
   )).limit(1);
   if (!session) return null;
   const user = await identityUser(context, value.split('~')[1]);
-  return hasRole(user, kind) && (!family || family.user.id !== user.id) ? { user, hash } : null;
+  return hasRole(user, kind) ? { user, hash } : null;
 }
 
 export async function throttle(key, limit, message = 'Trop de tentatives. Réessayez dans un quart d’heure.') {
@@ -120,9 +120,9 @@ export async function login(request, context, space, kind, family = null) {
   }
   if (typeof grant.access_token !== 'string' || !/^[\w.-]{32,3500}$/.test(grant.access_token)) throw identityUnavailable();
   const user = await identityUser(context, grant.access_token);
-  if (!hasRole(user, kind) || (family && family.user.id === user.id)) {
+  if (!hasRole(user, kind)) {
     if (isInvite && user?.id) return json({ accepted: true });
-    throw new HttpError(403, kind === 'admin' ? 'Un compte administrateur distinct est nécessaire.' : 'Ce compte n’a pas accès à l’espace familial.');
+    throw new HttpError(403, kind === 'admin' ? 'Ce compte n’a pas accès à l’espace administrateur.' : 'Ce compte n’a pas accès à l’espace familial.');
   }
   const ttl = Math.min(kind === 'admin' ? 900 : 2700, Number(grant.expires_in) || 900);
   const value = `${randomBytes(24).toString('base64url')}~${grant.access_token}`;

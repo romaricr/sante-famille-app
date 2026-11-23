@@ -52,7 +52,7 @@ function loginPanel(admin) {
       <div class="welcome-icon">${icon(admin ? 'shield' : 'lock')}</div>
       <span class="eyebrow">${admin ? 'ACCÈS ADMINISTRATEUR' : 'ESPACE FAMILLE'}</span>
       <h2 id="login-title">${admin ? 'Administration' : 'Bienvenue !'}</h2>
-      <p class="login-description">${admin ? 'Connectez-vous avec votre compte administrateur distinct pour consulter l’historique.' : 'Connectez-vous pour retrouver le carnet de santé de votre famille.'}</p>
+      <p class="login-description">${admin ? 'Connectez-vous avec un compte ayant le rôle administrateur pour consulter l’historique.' : 'Connectez-vous pour retrouver le carnet de santé de votre famille.'}</p>
       <form id="login-form" class="auth-form" method="post">
         <div class="field"><label for="email">Adresse e-mail</label><input id="email" name="email" type="email" autocomplete="username" autocapitalize="none" placeholder="vous@exemple.fr" maxlength="254" required></div>
         <div class="field"><label for="password">Mot de passe</label><div class="password-field"><input id="password" name="password" type="password" autocomplete="current-password" placeholder="Votre mot de passe" required maxlength="256"><button type="button" class="icon-button password-toggle" aria-label="Afficher le mot de passe" aria-pressed="false"><span>${icon('eye')}</span><span hidden>${icon('eyeOff')}</span></button></div></div>

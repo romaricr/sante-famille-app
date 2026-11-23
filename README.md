@@ -6,7 +6,7 @@ Cette édition est adaptée à Netlify : Netlify Server exécute le backend sous
 
 ## Avant la première utilisation
 
-Open Manage and search for 'Identity'. Le projet doit être configuré sur invitation uniquement. Les comptes qui accèdent au carnet doivent être invités avec le rôle `famille`. Utilisez un compte invité **distinct**, avec son propre mot de passe et le rôle `admin`, pour déverrouiller `/admin-locations.html` après une connexion familiale. Les rôles ne sont pas choisis par les utilisateurs.
+Open Manage and search for 'Identity'. Le projet doit être configuré sur invitation uniquement. Les comptes qui accèdent au carnet doivent être invités avec le rôle `famille`. Après une connexion familiale, déverrouillez `/admin-locations.html` en saisissant les identifiants d’un compte ayant le rôle `admin`. Vous pouvez attribuer les deux rôles `famille` et `admin` au même compte dans Netlify Identity et réutiliser ses identifiants, ou utiliser un compte administrateur séparé. Les changements de rôle prennent effet à la prochaine connexion ou au renouvellement du jeton. Les rôles ne sont pas choisis par les utilisateurs.
 
 La page de connexion et le service Identity du site de production doivent être joignables sans connexion à un compte d’équipe Netlify. Si Netlify intercepte ces requêtes avec sa propre page de connexion, l’invitation ne peut pas être vérifiée. La protection Netlify peut rester limitée aux aperçus ; en production, les dossiers restent protégés par la session et les rôles Identity.
 
@@ -36,7 +36,7 @@ Ouvrez `localhost:8889` pour travailler sur l’interface. Pour vérifier les in
 
 ## Recette avant de saisir de vraies données
 
-1. Vérifier l’invitation, la connexion et la déconnexion de deux comptes famille, puis l’ouverture de l’administration avec un compte distinct.
+1. Vérifier l’invitation, la connexion et la déconnexion de deux comptes famille, puis vérifier qu’un compte avec les rôles `famille` et `admin` peut déverrouiller l’administration avec ses propres identifiants. Vérifier qu’un compte `famille` seul est refusé et qu’un compte `admin` distinct peut toujours déverrouiller l’administration.
 2. Sur Safari iOS, prendre une photo, sélectionner un HEIC, enregistrer une dépense, rouvrir le justificatif et vérifier qu’un fichier invalide est refusé.
 3. Analyser une facture fictive et un ticket de pharmacie fictif, vérifier les valeurs proposées, puis vérifier qu’une saisie manuelle préalable n’est pas remplacée.
 4. Vérifier les trois indicateurs, les filtres, les trois exports et la suppression de sa propre dépense. Vérifier que l’autre compte ne peut pas la supprimer et qu’un justificatif ne s’ouvre pas sans session.
